@@ -48,8 +48,8 @@ input {
 
 button {
     font-size: 5em;
-    padding: .5em;
-    margin: .5em;
+    height: 100%;
+    width: 100%;
 }
 
 .bottom {
@@ -85,6 +85,11 @@ button {
 }
 
 .center {
-    display: inline-block;
-    margin-right: 15%;
+    width: 15em;
+    height: 10em;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }

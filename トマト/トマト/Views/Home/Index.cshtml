@@ -19,11 +19,6 @@
                 <textarea ng-model="rules" ng-show="showSchedule"></textarea>
             </div>
         </div>
-        <div class="center">
-            <div class="bottomer">
-                <button ng-show="playing" ng-click="stopMusic()">OK!</button>
-            </div>
-        </div>
         <div class="right">
             <div class="bottomer">
                 <h2 ng-click="showMovie=!showMovie">Movie</h2>
@@ -31,6 +26,9 @@
                 <div ng-bind-html="sound" ng-show="showMovie"></div>
             </div>
         </div>
+    </div>
+    <div class="center" ng-show="playing">
+        <button ng-click="stopMusic()">OK!</button>
     </div>
 </body>
 </html>
