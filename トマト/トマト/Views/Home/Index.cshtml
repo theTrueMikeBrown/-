@@ -1,6 +1,6 @@
 ﻿<html ng-app="tomatoApp" ng-controller="TomatoController">
 <head>
-    <title>{{clock.hours}}:{{clock.minutes}}:{{clock.seconds}}</title>
+    <title>{{getTimeRepresentation()}}</title>
     <link href="~/Content/Site.css" rel="stylesheet" />
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Scripts/angular-local-storage.min.js"></script>
@@ -10,16 +10,26 @@
 <body>
     <div class="display" style="color:{{getCurrentColor()}};">
         <h2>{{current.label}}</h2>
-        <span><span ng-show="showHours()">{{clock.hours}}:</span><span ng-show="showMinutes()">{{clock.minutes}}:</span>{{clock.seconds}}</span>
+        <span ng-class="sizingClass()">{{getTimeRepresentation()}}</span>
     </div>
     <div class="bottom">
-        <div class="rules">
-            <h2>Schedule</h2>
-            <textarea ng-model="rules"></textarea>
+        <div class="left">
+            <div class="bottomer">
+                <h2 ng-click="showSchedule=!showSchedule">Schedule</h2>
+                <textarea ng-model="rules" ng-show="showSchedule"></textarea>
+            </div>
         </div>
-        <div class="videoHolder">
-            <div ng-bind-html="sound"></div>
-            <button ng-show="playing" ng-click="stopMusic()">OK!</button>
+        <div class="center">
+            <div class="bottomer">
+                <button ng-show="playing" ng-click="stopMusic()">OK!</button>
+            </div>
+        </div>
+        <div class="right">
+            <div class="bottomer">
+                <h2 ng-click="showMovie=!showMovie">Movie</h2>
+                <input ng-model="movieUrl" ng-show="showMovie"></input>
+                <div ng-bind-html="sound" ng-show="showMovie"></div>
+            </div>
         </div>
     </div>
 </body>

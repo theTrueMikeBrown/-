@@ -1,5 +1,8 @@
 ﻿var phonecatApp = angular.module('tomatoApp', ['LocalStorageModule']);
 phonecatApp.controller('TomatoController', ['$scope', '$interval', '$sce', 'localStorageService', function TomatoController($scope, $interval, $sce, localStorageService) {
+    $scope.movieUrl = localStorageService.get('movieUrl') ||
+        'https://www.youtube.com/embed/QH2-TGUlwu4?autoplay=1';
+    //https://www.youtube.com/embed/1paueaTWFRE?autoplay=1&start=1&end=4
     $scope.rules =
         localStorageService.get('pomodoroRules') ||
         "09:00|Stand Up\n" +
@@ -39,12 +42,22 @@ phonecatApp.controller('TomatoController', ['$scope', '$interval', '$sce', 'loca
         return 'black';
     };
 
-    $scope.showHours = function() {
+    $scope.sizingClass = function () {
+        return $scope.showMinutes() ? $scope.showHours() ? '' : 'hoursHidden' : 'minutesHidden';
+    }
+
+    $scope.getTimeRepresentation = function () {
+        return ($scope.showHours() ? $scope.clock.hours + ':' : '')
+            + ($scope.showMinutes() ? $scope.clock.minutes + ':' : '')
+            + $scope.clock.seconds;
+    }
+
+    $scope.showHours = function () {
         return $scope.clock.hours !== '00';
     }
 
     $scope.showMinutes = function () {
-        return $scope.clock.hours !== '00' || $scope.clock.minutes !== '00';
+        return $scope.showHours() || $scope.clock.minutes !== '00';
     }
 
     var calculateMsTillTime = function (time) {
@@ -101,7 +114,7 @@ phonecatApp.controller('TomatoController', ['$scope', '$interval', '$sce', 'loca
         $scope.current = _.last(sorted);
 
         var playMusic = function () {
-            $scope.sound = $sce.trustAsHtml('<iframe width="560" height="315" src="https://www.youtube.com/embed/QH2-TGUlwu4?autoplay=1" frameborder="0">' + new Date().toString() + '</iframe>');
+            $scope.sound = $sce.trustAsHtml('<iframe width="560" height="315" src="' + $scope.movieUrl + '" frameborder="0">' + new Date().toString() + '</iframe>');
             $scope.playing = true;
         };
 
@@ -114,7 +127,7 @@ phonecatApp.controller('TomatoController', ['$scope', '$interval', '$sce', 'loca
 
     };
 
-    $scope.stopMusic = function() {
+    $scope.stopMusic = function () {
         $scope.sound = $sce.trustAsHtml('<div></div>');
         $scope.playing = false;
     };
@@ -123,5 +136,9 @@ phonecatApp.controller('TomatoController', ['$scope', '$interval', '$sce', 'loca
         setupCallback();
         tick();
         localStorageService.set('pomodoroRules', newValue);
+    });
+
+    $scope.$watch('movieUrl', function (newValue, oldValue) {
+        localStorageService.set('movieUrl', newValue);
     });
 }]);

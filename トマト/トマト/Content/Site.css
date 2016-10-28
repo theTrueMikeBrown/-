@@ -9,37 +9,82 @@ body {
 
 textarea {
     width: 20em;
-    height: 12em;
+    height: 25em;
 }
 
 .display {
     text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
     .display span {
         font-size: 24vw;
     }
 
+        .display span.hoursHidden,
+        .display span.hoursHidden * {
+            font-size: 35vw;
+        }
+
+        .display span.minutesHidden,
+        .display span.minutesHidden * {
+            font-size: 38vw;
+        }
+
     .display h2 {
         font-size: 10vw;
         margin: 0;
-        margin-top: .4em;
     }
 
-.rules h2 {
+.bottom > h2 {
     margin: 0;
 }
 
-.bottom div {
-    float: left;
+input {
+    width: 30em;
 }
 
-.videoHolder div {
-    display: none;
-}
-
-.videoHolder button {
+button {
     font-size: 5em;
     padding: .5em;
     margin: .5em;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 98%;
+    left: 1%;
+}
+
+.bottomer {
+    position: absolute;
+    bottom: 0;
+    opacity: .75;
+}
+
+.left .bottomer {
+    left: 0;
+}
+
+.right .bottomer {
+    right: 0;
+}
+
+.left {
+    float: left;
+    position: relative;
+}
+
+.right {
+    float: right;
+    position: relative;
+}
+
+.center {
+    display: inline-block;
+    margin-right: 15%;
 }
