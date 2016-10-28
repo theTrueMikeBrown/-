@@ -3,13 +3,14 @@
     <title>{{clock.hours}}:{{clock.minutes}}:{{clock.seconds}}</title>
     <link href="~/Content/Site.css" rel="stylesheet" />
     <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-local-storage.min.js"></script>
     <script src="~/Scripts/lodash.min.js"></script>
     <script src="~/app/app.js"></script>
 </head>
 <body>
     <div class="display" style="color:{{getCurrentColor()}};">
         <h2>{{current.label}}</h2>
-        <span>{{clock.hours}}:{{clock.minutes}}:{{clock.seconds}}</span>
+        <span><span ng-show="showHours()">{{clock.hours}}:</span><span ng-show="showMinutes()">{{clock.minutes}}:</span>{{clock.seconds}}</span>
     </div>
     <div class="bottom">
         <div class="rules">

@@ -131,6 +131,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\angular-local-storage.min.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\lodash.min.js" />
     <Content Include="Web.config" />
@@ -152,7 +153,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="package.json" />
+    <Content Include="Fonts\BPreplay.otf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

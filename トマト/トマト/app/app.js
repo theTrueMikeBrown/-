@@ -1,6 +1,7 @@
-﻿var phonecatApp = angular.module('tomatoApp', []);
-phonecatApp.controller('TomatoController', ['$scope', '$interval', '$sce', function TomatoController($scope, $interval, $sce) {
+﻿var phonecatApp = angular.module('tomatoApp', ['LocalStorageModule']);
+phonecatApp.controller('TomatoController', ['$scope', '$interval', '$sce', 'localStorageService', function TomatoController($scope, $interval, $sce, localStorageService) {
     $scope.rules =
+        localStorageService.get('pomodoroRules') ||
         "09:00|Stand Up\n" +
         "09:10|Pomodoro\n" +
         "10:00|Break\n" +
@@ -37,6 +38,14 @@ phonecatApp.controller('TomatoController', ['$scope', '$interval', '$sce', funct
         }
         return 'black';
     };
+
+    $scope.showHours = function() {
+        return $scope.clock.hours !== '00';
+    }
+
+    $scope.showMinutes = function () {
+        return $scope.clock.hours !== '00' || $scope.clock.minutes !== '00';
+    }
 
     var calculateMsTillTime = function (time) {
         var now = new Date();
@@ -102,6 +111,7 @@ phonecatApp.controller('TomatoController', ['$scope', '$interval', '$sce', funct
         };
 
         performCallbackAtTime($scope.next.time, callback);
+
     };
 
     $scope.stopMusic = function() {
@@ -112,5 +122,6 @@ phonecatApp.controller('TomatoController', ['$scope', '$interval', '$sce', funct
     $scope.$watch('rules', function (newValue, oldValue) {
         setupCallback();
         tick();
+        localStorageService.set('pomodoroRules', newValue);
     });
 }]);
