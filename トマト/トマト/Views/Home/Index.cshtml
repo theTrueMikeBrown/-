@@ -1,4 +1,6 @@
-﻿<html ng-app="tomatoApp" ng-controller="TomatoController">
+﻿@model int
+
+<html ng-app="tomatoApp" ng-controller="TomatoController">
 <head>
     <title>{{getTimeRepresentation()}}</title>
     <link href="~/Content/Site.css" rel="stylesheet" />
@@ -8,6 +10,10 @@
     <script src="~/app/app.js"></script>
 </head>
 <body>
+    @for (int i = 0; i < @Model; i++)
+    {
+        <br />
+    }
     <div class="display" style="color:{{getCurrentColor()}};">
         <h2>{{current.label}}</h2>
         <span ng-class="sizingClass()">{{getTimeRepresentation()}}</span>
