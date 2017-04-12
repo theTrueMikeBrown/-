@@ -1,5 +1,5 @@
-﻿@model int
-
+﻿@using System.Configuration
+@model int
 <html ng-app="tomatoApp" ng-controller="TomatoController">
 <head>
     <title>{{getTimeRepresentation()}}</title>
@@ -25,16 +25,22 @@
                 <textarea ng-model="rules" ng-show="showSchedule"></textarea>
             </div>
         </div>
-        <div class="right">
-            <div class="bottomer">
-                <h2 ng-click="showMovie=!showMovie">Movie</h2>
-                <input ng-model="movieUrl" ng-show="showMovie"></input>
-                <div ng-bind-html="sound" ng-show="showMovie"></div>
+        @if (Boolean.Parse(ConfigurationManager.AppSettings["PlayMusicAndShowOkayButton"]))
+        {
+            <div class="right">
+                <div class="bottomer">
+                    <h2 ng-click="showMovie=!showMovie">Movie</h2>
+                    <input ng-model="movieUrl" ng-show="showMovie" />
+                    <div ng-bind-html="sound" ng-show="showMovie"></div>
+                </div>
             </div>
+        }
+    </div>
+    @if (Boolean.Parse(ConfigurationManager.AppSettings["PlayMusicAndShowOkayButton"]))
+    {
+        <div class="center" ng-show="playing">
+            <button ng-click="stopMusic()">OK!</button>
         </div>
-    </div>
-    <div class="center" ng-show="playing">
-        <button ng-click="stopMusic()">OK!</button>
-    </div>
+    }
 </body>
 </html>
